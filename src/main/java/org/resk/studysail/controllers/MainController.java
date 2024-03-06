@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 @RequestMapping("StudySail")
 public class MainController {
-    @GetMapping
+    @GetMapping()
     public String greet(){
         return "index";
     }
