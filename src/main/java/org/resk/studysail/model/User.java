@@ -2,6 +2,8 @@ package org.resk.studysail.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +16,16 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @ManyToMany(mappedBy = "users")
+    private Set<Course> courses;
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 
     public User() {}
 
@@ -46,5 +58,18 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        User user = (User) object;
+        return Objects.equals(ID, user.ID) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(courses, user.courses);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, name, email, courses);
     }
 }

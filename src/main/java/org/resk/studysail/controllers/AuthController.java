@@ -33,5 +33,6 @@ public class AuthController {
     public User getUser(@PathVariable(name = "id") long id){
         return userService.getUser(id);
     }
-
+    @DeleteMapping("/user/{id}")
+    public void deleteUSer(@PathVariable(name = "id") long id){userService.deleteUser(id);}
 }
